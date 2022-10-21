@@ -12,7 +12,7 @@ JavaのThread使用時の挙動確認
 - スレッド属性は`thread.setDaemon(bool)`で指定する
 - スレッドの停止は`thread.stop()`ではなくなった（=非推奨となった）
   - `while()` で繰り返し処理させるようなスレッドの場合は、以下のように実行中フラグを管理し、メインスレッド側から`stopThread()`を呼び出して終了させる
-    ```
+    ```Java
     private AtomicBoolean running = new AtomicBoolean(false);
     #
     #
@@ -35,7 +35,7 @@ JavaのThread使用時の挙動確認
 ### メインスレッド側
 - `Future<Generics> future`にスレッドからの戻り値の型を指定
 - `future.get()`にタイムアウト時間を指定可能
-```
+```Java
 ThreadFactory daemon = new ThreadFactory() {
     @Override
     public Thread newThread(Runnable r) {
@@ -64,7 +64,7 @@ try {
 ### スレッド側
 - Callableを実装、call()をオーバーライドしてやりたい処理を実装  
 - ジェネリクスに戻り値の方を指定
-```
+```Java
 public class MyThread implements Callable<String> {
     public String call () {
         try {

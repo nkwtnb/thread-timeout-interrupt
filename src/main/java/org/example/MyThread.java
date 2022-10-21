@@ -1,7 +1,11 @@
 package org.example;
 
-public class MyThread extends Thread{
-    public void run () {
+import java.util.concurrent.Callable;
+
+import static java.lang.Thread.sleep;
+
+public class MyThread implements Callable<String> {
+    public String call () {
         System.out.println("Hello, from thread");
         try {
             System.out.println("1");
@@ -18,5 +22,6 @@ public class MyThread extends Thread{
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
+        return "from thread";
     }
 }
